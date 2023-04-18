@@ -1,11 +1,3 @@
-#!/bin/bash
-
-if [ $# -eq 0 ]; then
-  echo "Usage: $0 username"
-  exit 1
-fi
-
-whoami_cmd="whoami"
-
-su -c "$whoami_cmd" $1
-
+#!/usr/bin/env bash
+# Runs the whoami command under the user passed as argument.
+sudo -u "$1" whoami
