@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
-# Creates RSA key pair
 
-ssh-keygen -b 4096 -f school -t rsa -N betty
+# Set the variables
+private_key_name="school"
+key_bits=4096
+passphrase="betty"
+
+# Generate the RSA key pair
+openssl genrsa -aes256 -passout pass:"$passphrase" -out "$private_key_name".key "$key_bits"
+
+# Generate the public key from the private key
+openssl rsa -in "$private_key_name".key -passin pass:"$passphrase" -pubout -out "$private_key_name".pub
+
+# Output success message
+echo "RSA key pair generated successfully."
